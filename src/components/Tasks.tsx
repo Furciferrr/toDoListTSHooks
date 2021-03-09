@@ -5,6 +5,8 @@ import { FilterType, TasksType } from './ToDoList';
 type TasksPropsType = {
   tasks: TasksType
   filterValue: FilterType
+  removeTask: (id: number) => void
+  compliteTask: (id: number) => void
 }
 
 function Tasks (props:TasksPropsType) {
@@ -26,9 +28,9 @@ function Tasks (props:TasksPropsType) {
       {filteredTask(props.filterValue).map(task=> {
         return (
           <li key={task.id} style={{listStyleType: 'none'}}>
-            <input type='checkbox' checked={task.complited}/>
+            <input type='checkbox' checked={task.complited} onClick={()=> {props.compliteTask(task.id)}}/>
             <span>{task.taskText}</span>
-            <button>del</button>
+            <button onClick={()=>{props.removeTask(task.id)}} >del</button>
           </li>
         )
       })}

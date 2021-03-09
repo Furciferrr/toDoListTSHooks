@@ -41,19 +41,33 @@ function ToDoList () {
     setFilterValue(filter)
   }
 
+  const removeTask = (id: number) => {
+    const removed = tasks.filter(task => task.id !== id)
+    setTasks(removed)
+  }
+
+  const compliteTask = (id: number) => {
+    setTasks(tasks.map(item => {
+        return item.id === id ? {...item, complited: !item.complited} : item
+    }))
+   
+  }
 
 
+  
 
   return (
     <div>
      <input type='text' value={inputValue} onChange={(e)=>{chengeInputValue(e)}}/>
      <button onClick={()=>{addNewTask(inputValue)}}>Add</button>
-     <Tasks tasks={tasks} filterValue={filterValue}/> 
+     <Tasks tasks={tasks} filterValue={filterValue} removeTask={removeTask} compliteTask={compliteTask}/> 
 
      <div>
        <button onClick={()=> {chengeFilter('all')}}>All</button>
        <button onClick={()=> {chengeFilter('complite')}}>Complited</button>
        <button onClick={()=> {chengeFilter('active')}}>Active</button>
+       
+
      </div>
     </div>
   );
